@@ -31,4 +31,10 @@ public class CityController {
 		ResponseEntity<List<City>> cities = cityService.findAllByCountryCode(countryCode);
 		return cities;
 	}
+
+	@GetMapping("/continent/cities")
+	public ResponseEntity<List<City>> findByCountry_Continent(@RequestParam("continentName") String continentName) {
+		ResponseEntity<List<City>> cities = cityService.findByCountry_Continent(continentName);
+		return cities;
+	}
 }

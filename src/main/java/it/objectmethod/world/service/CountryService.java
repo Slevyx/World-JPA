@@ -17,7 +17,7 @@ public class CountryService {
 	private CountryRepository countryRepo;
 
 	public ResponseEntity<List<Country>> findCountryByNameAndOrContinent(String countryName, String continentName) {
-		ResponseEntity<List<Country>> response = null;
+		ResponseEntity<List<Country>> response;
 		if (countryName == null || continentName == null) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
@@ -34,8 +34,13 @@ public class CountryService {
 	}
 
 	public ResponseEntity<List<Country>> findByContinent(String continentName) {
-		List<Country> countries = countryRepo.findByContinent(continentName);
-		ResponseEntity<List<Country>> response = new ResponseEntity<>(countries, HttpStatus.OK);
+		ResponseEntity<List<Country>> response;
+		if (continentName == null) {
+			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} else {
+			List<Country> countries = countryRepo.findByContinent(continentName);
+			response = new ResponseEntity<>(countries, HttpStatus.OK);
+		}
 		return response;
 	}
 }

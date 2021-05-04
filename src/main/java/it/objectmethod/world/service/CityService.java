@@ -18,7 +18,7 @@ public class CityService {
 
 	public ResponseEntity<City> findByName(String cityName) {
 		City city = null;
-		ResponseEntity<City> response = null;
+		ResponseEntity<City> response;
 		if (cityName == null || cityName.trim().isEmpty()) {
 			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
@@ -29,8 +29,19 @@ public class CityService {
 	}
 
 	public ResponseEntity<List<City>> findAllByCountryCode(String countryCode) {
-		List<City> cities = cityRepo.findAllByCountryCode(countryCode);
+		List<City> cities = cityRepo.findByCountryCode(countryCode);
 		ResponseEntity<List<City>> response = new ResponseEntity<>(cities, HttpStatus.OK);
+		return response;
+	}
+
+	public ResponseEntity<List<City>> findByCountry_Continent(String continentName) {
+		ResponseEntity<List<City>> response;
+		if (continentName == null) {
+			response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} else {
+			List<City> cities = cityRepo.findByCountry_Continent(continentName);
+			response = new ResponseEntity<>(cities, HttpStatus.OK);
+		}
 		return response;
 	}
 }
