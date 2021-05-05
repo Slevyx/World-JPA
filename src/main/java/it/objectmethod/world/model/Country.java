@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Country {
 
 	@Id
+	@Column(name = "Code")
 	private String code;
 
 	@Column(name = "Name")
